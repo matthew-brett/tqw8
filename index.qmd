@@ -24,14 +24,6 @@ income = np.array([62, 72, 75, 55, 64, 21, 64, 80, 67, 72, 42, 76, 76, 41, 48])
 def interactive_notation(edu_slope_guess=1,
                          inc_slope_guess=0.37,
                          intercept_guess=58):
-
-    # calculate the fitted values, for this combination of parameter estimates
-    fitted = edu_slope_guess * education + inc_slope_guess * income + intercept_guess
-
-    # calculate the errors, for this combination of parameter estimates
-    errors = prestige - fitted
-
-    # do not worry about this code, it just prints the mathematical notation below this cell
     jupyprint("$\\vec{\\hat{y}} = b_1 * $ `education` + $b_2 * $ `income` +   $\\text{c} $")
 
 interact(interactive_notation, edu_slope_guess = (-1, 1, 0.1), inc_slope_guess = (-1, 1, 0.1), intercept_guess = (-10, 10, 0.1))
