@@ -38,3 +38,86 @@ def interactive_notation(edu_slope_guess=1,
 
 interact(interactive_notation, edu_slope_guess = (-1, 1, 0.1), inc_slope_guess = (-1, 1, 0.1), intercept_guess = (-10, 10, 0.1))
 ```
+
+```{python}
+def ss_two_predictors(bs_and_c, x1_vector, x2_vector, y_vector):
+    """ Sum of squares error for intercept and a pair of slopes.
+    """
+    # unpack the list containing the slope and the intercept (this now has an extra slope!)
+    b_1, b_2, c = bs_and_c 
+    
+    # calculate the fitted values, for this slope/intercept pairing (this now has an extra slope and extra vector!)
+    fitted_vector = b_1*x1_vector + b_2*x2_vector + c 
+    
+    # calculate the error vector (this is the same process as for a single predictor)
+    error = y_vector - fitted_vector
+    
+    # return the value of the cost function (this is the same process as for a single predictor)
+    return np.sum(error ** 2)
+```
+
+```{python}
+# do not worry about this code, iit is just to generate the 3D plots
+def make_3d_scatter(x1, x2, y,
+                    x1_slope = 1,
+                    x2_slope = 0.37,
+                    c =  58,
+                   x1_label = 'education',
+                   x2_label = 'income',
+                   y_label = 'prestige',
+                   return_errors = False,
+                   show = True,
+                   plane_alpha = 0.5):
+    sum_sq = ss_two_predictors([x1_slope, x2_slope, c], x1, x2, y)
+    ax = plt.figure(figsize=(8,8)).add_subplot(111, projection='3d')
+    ax.scatter(x1,x2,y, label = 'Actual values ($y$)')
+    ax.set_xlabel(x1_label)
+    ax.set_ylabel(x2_label)
+    ax.set_zlabel(y_label)
+    mx_x1 = x1.max()
+    mx_x2 = x2.max()
+    mx_y = y.max()
+    # Plot the fitting plane.
+    plane_x = np.linspace(0, mx_x1, 50)
+    plane_y = np.linspace(0, mx_x2, 50)
+    X, Y = np.meshgrid(plane_x, plane_y)
+    Z = c + x1_slope * X + x2_slope * Y
+    ax.plot_wireframe(X,Y,Z, color = 'red', label = 'Linear regression plane', alpha = plane_alpha)
+    # Plot lines between each point and fitting plane
+    # add labels to error
+    ax.plot([], [], [],
+        linestyle=':',
+        linewidth=0.5,
+        color='black',
+        label = 'Errors ($ \\varepsilon $)')
+    # Set the axis limits (and reverse y axis)
+    ax.set_xlim(0, mx_x1)
+    ax.set_ylim(0, mx_x2)
+    ax.set_zlim(0, mx_y)
+    # show the legend
+    plt.legend()
+    plt.title(f"\n$b_1$ = {round(x1_slope,2)} \n$b_2$ = {round(x2_slope,2)} \n$c$ = {round(c,2)} \n Sum of Squared Error = {round(sum_sq, 2)}")
+    if show == True:
+        plt.show()
+    if return_errors == True:
+        fitted = c + x1_slope * x1 + x2_slope*x2
+        errors = y - fitted
+        jupyprint(f"Here is the error vector for the current regression plane: {arraytex(np.atleast_2d(errors.round(2)).T)}")
+        jupyprint(f"The sum of the squared error is <b> {round(np.sum((errors)**2), 2)} </b>.")
+        return errors 
+
+
+# some convenience plotting functions
+def plot_model_3D(x1_slope, x2_slope, c, return_errors = True):
+    errors = make_3d_scatter(education, income, prestige,
+               x1_slope = x1_slope, 
+               x2_slope = x2_slope,
+               c = c,
+               return_errors = return_errors)
+    return errors
+
+# do not worry about this code, it just generates the plot below
+errors3d_two_predictor = plot_model_3D(x1_slope = 1,
+                                       x2_slope = 0.37,
+                                       c = 58)
+```
