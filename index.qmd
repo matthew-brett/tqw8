@@ -21,6 +21,25 @@ income = np.array([62, 72, 75, 55, 64, 21, 64, 80, 67, 72, 42, 76, 76, 41, 48])
 ```
 
 ```{python}
+def interactive_notation(edu_slope_guess=1,
+                         inc_slope_guess=0.37,
+                         intercept_guess=58):
+
+    # calculate the fitted values, for this combination of parameter estimates
+    fitted = edu_slope_guess * education + inc_slope_guess * income + intercept_guess
+
+    # calculate the errors, for this combination of parameter estimates
+    errors = prestige - fitted
+
+    # do not worry about this code, it just prints the mathematical notation below this cell
+    jupyprint("$\\vec{\\hat{y}} = b_1 * $ `education` + $b_2 * $ `income` +   $\\text{c} $")
+    jupyprint(f"${arraytex(np.atleast_2d(fitted + errors).T)} = {round(edu_slope_guess, 2)} * {arraytex(np.atleast_2d(education).T)} + {round(inc_slope_guess, 2)} * {arraytex(np.atleast_2d(income).T)} + {round(intercept_guess, 2)} + {arraytex(np.atleast_2d(errors).round(2).T)}$")
+    jupyprint(f"The sum of the squared errors for this combination of parameter estimates is <b> {round(np.sum(errors**2), 2)} </b>")
+
+interact(interactive_notation, edu_slope_guess = (-1, 1, 0.1), inc_slope_guess = (-1, 1, 0.1), intercept_guess = (-10, 10, 0.1))
+```
+
+```{python}
 # do not worry about this code, iit is just to generate the 3D plots
 def make_3d_scatter(x1, x2, y,
                     x1_slope = 1,
