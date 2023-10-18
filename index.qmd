@@ -38,28 +38,3 @@ def interactive_notation(edu_slope_guess=1,
 
 interact(interactive_notation, edu_slope_guess = (-1, 1, 0.1), inc_slope_guess = (-1, 1, 0.1), intercept_guess = (-10, 10, 0.1))
 ```
-
-```{python}
-# do not worry about this code, iit is just to generate the 3D plots
-def make_3d_scatter(x1, x2, y,
-                    x1_slope = 1,
-                    x2_slope = 0.37,
-                    c =  58,
-                   x1_label = 'education',
-                   x2_label = 'income',
-                   y_label = 'prestige',
-                   return_errors = False,
-                   show = True,
-                   plane_alpha = 0.5):
-    sum_sq = 1000
-    ax = plt.figure(figsize=(8,8)).add_subplot(111, projection='3d')
-
-# some convenience plotting functions
-def plot_model_3D(x1_slope, x2_slope, c, return_errors = True):
-    errors = make_3d_scatter(education, income, prestige,
-               x1_slope = x1_slope, 
-               x2_slope = x2_slope,
-               c = c,
-               return_errors = return_errors)
-    return errors
-```
