@@ -10,12 +10,7 @@ from jupyprint import arraytex, jupyprint
 
 ```{python}
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-```
-
-```{python}
-df = pd.read_csv('Duncan_Occupational_Prestige.csv').head(15)
 ```
 
 ```{python}
@@ -89,13 +84,6 @@ def make_3d_scatter(x1, x2, y,
     Z = c + x1_slope * X + x2_slope * Y
     ax.plot_wireframe(X,Y,Z, color = 'red', label = 'Linear regression plane', alpha = plane_alpha)
     # Plot lines between each point and fitting plane
-    for i, row in df.iterrows():
-        x1_point, x2_point, actual = row[x1_label], row[x2_label], row[y_label]
-        fitted = c + x1_point * x1_slope + x2_point * x2_slope
-        ax.plot([x1_point, x1_point], [x2_point, x2_point], [fitted, actual],
-                linestyle=':',
-                linewidth=0.5,
-                color='black')
     # add labels to error
     ax.plot([], [], [],
         linestyle=':',
