@@ -5,23 +5,27 @@ from ipywidgets import interact
 ```
 
 ```{python}
-from jupyprint import jupyprint
+from jupyprint import arraytex, jupyprint
 ```
 
 ```{python}
 import numpy as np
+import matplotlib.pyplot as plt
 ```
 
 ```{python}
 education = np.array([ 86,  76,  92,  90,  86,  84,  93, 100,  87,  86,  74,
                       98,  97, 84,  91])
+prestige = np.array([82, 83, 90, 76, 90, 87, 93, 90, 52, 88, 57, 89, 97, 59, 73])
 income = np.array([62, 72, 75, 55, 64, 21, 64, 80, 67, 72, 42, 76, 76, 41, 48])
 ```
 
 ```{python}
-def func(a=1, b=0.37, c=58):
+def interactive_notation(edu_slope_guess=1,
+                         inc_slope_guess=0.37,
+                         intercept_guess=58):
+
     jupyprint("$\\vec{\\hat{y}} = b_1 * $ `education` + $b_2 * $ `income` +   $\\text{c} $")
 
-
-interact(func, a = (-1, 1, 0.1), b = (-1, 1, 0.1), c = (-10, 10, 0.1))
+interact(interactive_notation, edu_slope_guess = (-1, 1, 0.1), inc_slope_guess = (-1, 1, 0.1), intercept_guess = (-10, 10, 0.1))
 ```
