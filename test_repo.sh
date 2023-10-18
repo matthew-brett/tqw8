@@ -14,6 +14,7 @@ do
     out="${out_base}_${i}"
     echo $out
     rm -rf $out
-    # git clone $my_dir $out
-    # (cd $out && make)
+    git clone $my_dir $out
+    (cd $out && make)
+    rm -rf $out
 done
