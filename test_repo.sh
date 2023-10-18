@@ -6,9 +6,14 @@ if [ -z "$suffix" ]; then
 fi
 my_dir=$(dirname "${BASH_SOURCE[0]}")
 base_dir=$(dirname $my_dir)
-out="$base_dir/tmp_repo_$suffix"
-rm -rf $out
+out_base="$base_dir/tmp_repo_$suffix"
 (cd $my_dir && git commit -a -m 'Again')
 cd $base_dir
-git clone $my_dir $out
-(cd $out && make)
+for i in {1..20}
+do
+    out="$out_base_i"
+    echo $out
+    rm -rf $out
+    # git clone $my_dir $out
+    # (cd $out && make)
+done
