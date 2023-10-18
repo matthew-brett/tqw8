@@ -62,9 +62,4 @@ def plot_model_3D(x1_slope, x2_slope, c, return_errors = True):
                c = c,
                return_errors = return_errors)
     return errors
-
-# do not worry about this code, it just generates the plot below
-errors3d_two_predictor = plot_model_3D(x1_slope = 1,
-                                       x2_slope = 0.37,
-                                       c = 58)
 ```
