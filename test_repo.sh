@@ -9,7 +9,7 @@ base_dir=$(dirname $my_dir)
 out_base="$base_dir/tmp_repo_$suffix"
 (cd $my_dir && git commit -a -m 'Again')
 cd $base_dir
-for i in {1..20}
+for i in {1..30}
 do
     out="${out_base}_${i}"
     echo $out
