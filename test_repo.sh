@@ -11,7 +11,7 @@ out_base="$base_dir/tmp_repo_$suffix"
 cd $base_dir
 for i in {1..20}
 do
-    out="${out_base}_{$i}"
+    out="${out_base}_${i}"
     echo $out
     rm -rf $out
     # git clone $my_dir $out
