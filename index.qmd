@@ -21,42 +21,6 @@ income = np.array([62, 72, 75, 55, 64, 21, 64, 80, 67, 72, 42, 76, 76, 41, 48])
 ```
 
 ```{python}
-def interactive_notation(edu_slope_guess=1,
-                         inc_slope_guess=0.37,
-                         intercept_guess=58):
-
-    # calculate the fitted values, for this combination of parameter estimates
-    fitted = edu_slope_guess * education + inc_slope_guess * income + intercept_guess
-
-    # calculate the errors, for this combination of parameter estimates
-    errors = prestige - fitted
-
-    # do not worry about this code, it just prints the mathematical notation below this cell
-    jupyprint("$\\vec{\\hat{y}} = b_1 * $ `education` + $b_2 * $ `income` +   $\\text{c} $")
-    jupyprint(f"${arraytex(np.atleast_2d(fitted + errors).T)} = {round(edu_slope_guess, 2)} * {arraytex(np.atleast_2d(education).T)} + {round(inc_slope_guess, 2)} * {arraytex(np.atleast_2d(income).T)} + {round(intercept_guess, 2)} + {arraytex(np.atleast_2d(errors).round(2).T)}$")
-    jupyprint(f"The sum of the squared errors for this combination of parameter estimates is <b> {round(np.sum(errors**2), 2)} </b>")
-
-interact(interactive_notation, edu_slope_guess = (-1, 1, 0.1), inc_slope_guess = (-1, 1, 0.1), intercept_guess = (-10, 10, 0.1))
-```
-
-```{python}
-def ss_two_predictors(bs_and_c, x1_vector, x2_vector, y_vector):
-    """ Sum of squares error for intercept and a pair of slopes.
-    """
-    # unpack the list containing the slope and the intercept (this now has an extra slope!)
-    b_1, b_2, c = bs_and_c 
-    
-    # calculate the fitted values, for this slope/intercept pairing (this now has an extra slope and extra vector!)
-    fitted_vector = b_1*x1_vector + b_2*x2_vector + c 
-    
-    # calculate the error vector (this is the same process as for a single predictor)
-    error = y_vector - fitted_vector
-    
-    # return the value of the cost function (this is the same process as for a single predictor)
-    return np.sum(error ** 2)
-```
-
-```{python}
 # do not worry about this code, iit is just to generate the 3D plots
 def make_3d_scatter(x1, x2, y,
                     x1_slope = 1,
@@ -68,7 +32,7 @@ def make_3d_scatter(x1, x2, y,
                    return_errors = False,
                    show = True,
                    plane_alpha = 0.5):
-    sum_sq = ss_two_predictors([x1_slope, x2_slope, c], x1, x2, y)
+    sum_sq = 1000
     ax = plt.figure(figsize=(8,8)).add_subplot(111, projection='3d')
     ax.scatter(x1,x2,y, label = 'Actual values ($y$)')
     ax.set_xlabel(x1_label)
