@@ -5,14 +5,14 @@ from ipywidgets import interact
 ```
 
 ```{python}
-from IPython.display import display, Markdown
+from jupyprint import jupyprint
 ```
 
 ```{python}
-def interactive_notation(a=1,
-                         b=0.37,
-                         c=58):
-    display(Markdown("$\\vec{\\hat{y}} = b_1 * $ `education` + $b_2 * $ `income` +   $\\text{c} $"))
+def interactive_notation(edu_slope_guess=1,
+                         inc_slope_guess=0.37,
+                         intercept_guess=58):
+    jupyprint("$\\vec{\\hat{y}} = b_1 * $ `education` + $b_2 * $ `income` +   $\\text{c} $")
 
-interact(interactive_notation, a = (-1, 1, 0.1), b = (-1, 1, 0.1), c = (-10, 10, 0.1))
+interact(interactive_notation, edu_slope_guess = (-1, 1, 0.1), inc_slope_guess = (-1, 1, 0.1), intercept_guess = (-10, 10, 0.1))
 ```
